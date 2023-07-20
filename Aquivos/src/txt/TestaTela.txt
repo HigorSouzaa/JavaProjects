@@ -1,0 +1,13 @@
+package testes;
+
+import telas.TelaAluno;
+
+public class "Nome do Pacote" {
+
+	public static void main(String[] args) {
+		"Tela" aluno = new "Tela"("ESCOLA");
+		aluno.setVisible(true); //deixa a tela visivel
+		
+	}
+
+}

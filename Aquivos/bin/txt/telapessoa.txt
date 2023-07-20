@@ -1,0 +1,29 @@
+package telas;
+
+import java.awt.HeadlessException;
+
+import javax.swing.JFrame;
+
+
+public class TelaAluno extends JFrame {
+
+	public TelaAluno(String title) throws HeadlessException {
+		super(title);
+		setSize(400, 400);//tamanho da tela
+		setLayout(null);//desabilita dimensionamento automatico do java
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//fecha a janela e encerra o programa 
+		iniciarComponente();
+		criarEventos();
+	}
+
+	private void iniciarComponente() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void criarEventos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

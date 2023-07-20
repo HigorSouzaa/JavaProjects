@@ -1,0 +1,18 @@
+
+		String[] menu= {"Cadastrar","Pesquisar","Mostrar","Sair"}; //Matriz Estatica
+		String opcao; 
+
+		do { 
+			opcao = (String) JOptionPane.showInputDialog(null, "Escolha uma opção", "A Escola", JOptionPane.INFORMATION_MESSAGE, null, menu, "Cadastrar");
+			
+			switch (opcao) {
+			case "Cadastrar": break;
+			case "Pesquisar": break;
+			case "Mostrar": break;
+								
+			default: break;
+				
+			}
+			
+			
+		} while (!opcao.equalsIgnoreCase("Sair"));
