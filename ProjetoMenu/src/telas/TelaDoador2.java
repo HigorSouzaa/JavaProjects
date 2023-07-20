@@ -1,0 +1,142 @@
+package telas;
+
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import classes.Doador;
+
+public class TelaDoador2 extends JFrame {
+	
+	private JLabel jlNome, jlPeso, jlIdade, jlGenero;
+	private JTextField jtfNome, jtfPeso, jtfIdade;
+	private JRadioButton jrbMasculino, jrbFeminino;
+	private JButton jbCadastrar, jbMostrar;
+	private ButtonGroup bgGenero = new ButtonGroup();
+	private Doador doador = null;
+	
+	public TelaDoador2(String title) throws HeadlessException {
+		super(title);
+		setSize(240, 250);//tamanho da tela
+		setLayout(null);//desabilita dimensionamento automatico do java
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//fecha a janela e encerra o programa 
+		iniciarComponente();
+		criarEventos();
+	}
+
+	private void iniciarComponente() {
+		
+		//Objetos
+		jlNome = new JLabel("Nome");
+		jtfNome = new JTextField();
+		
+		jlPeso = new JLabel("Peso");
+		jtfPeso  = new JTextField();
+		
+		jlIdade = new JLabel("Idade");
+		jtfIdade = new JTextField();
+		
+		jlGenero = new JLabel("Genero");
+		jrbMasculino = new JRadioButton("Maculino");
+		jrbFeminino = new JRadioButton("Feminino");
+		
+		//Agrupar os Radio Button em um ButtonGroup
+		bgGenero.add(jrbMasculino);
+		bgGenero.add(jrbFeminino);
+		
+		jbCadastrar = new JButton("Cadastrar");
+		jbMostrar = new JButton("Mostrar");
+		
+		//adicionar a tela
+		add(jlNome);
+		add(jtfNome);
+		
+		add(jlPeso);
+		add(jtfPeso);
+		
+		add(jlIdade);
+		add(jtfIdade);
+
+		add(jlGenero);
+		add(jrbMasculino);
+		add(jrbFeminino);
+		
+		add(jbCadastrar);
+		add(jbMostrar);
+		
+		//dimencionamento
+		jlNome.setBounds(10, 20, 50, 20);  //coluna,linha,comprimento e largura
+		jtfNome.setBounds(10, 40, 200, 20);
+		
+		jlPeso.setBounds(10, 60, 50, 20);  //coluna,linha,comprimento e largura
+		jtfPeso.setBounds(10, 80, 50, 20);
+		
+		jlIdade.setBounds(160, 60, 50, 20);  //coluna,linha,comprimento e largura
+		jtfIdade.setBounds(160, 80, 50, 20);
+		
+		jlGenero.setBounds(10, 110, 50, 20);  //coluna,linha,comprimento e largura
+		jrbMasculino.setBounds(10, 130, 80, 20);
+		jrbFeminino.setBounds(10, 150, 80, 20);
+
+		jbCadastrar.setBounds(110, 120, 100, 20);
+		jbMostrar.setBounds(110, 150, 100, 20);
+		
+	}
+
+	private void criarEventos() {
+		// TODO Auto-generated method stub
+		jbCadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if (!jtfNome.getText().isEmpty() 
+				&&	!jtfPeso.getText().isEmpty()
+				&&	!jtfIdade.getText().isEmpty()) {
+					String nome;
+					String genero;
+					int idade;
+					float peso;
+					
+					nome = jtfNome.getText();
+					genero = jrbMasculino.isSelected()? "Masculino" : "Feminino";
+					idade = Integer.parseInt(jtfIdade.getText());
+					peso = Float.parseFloat(jtfPeso.getText());
+					
+					doador = new Doador(nome, peso, idade, genero);
+					doador.mostrarQuantidadeSangue();
+					
+					jtfNome.setText("");
+					jtfPeso.setText("");
+					jtfIdade.setText("");
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Doador", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});//Fim Cadastrar
+		
+		jbMostrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (doador != null) {
+					JOptionPane.showMessageDialog(null, doador.mostrarQuantidadeSangue());
+				} else {
+					JOptionPane.showMessageDialog(null, "Doador nao cadastrado", "Doador", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+			}
+		});
+	}
+
+}
